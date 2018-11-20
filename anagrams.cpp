@@ -1,11 +1,11 @@
 /******************************************************************************
-|  Anagram Finder
-|
-|  Description: This program uses brute force permutation to find all anagrams
-|               of a given word. The results are output for the user. Any .txt
-|               file with newline separated values can be used in place of the
-|               current dictionary.
-|
+| Lane Moseley - 11/20/18 - Anagram Finder                                    |
+|                                                                             |
+| Description: This program uses brute force permutation to find all anagrams |
+|              of a given word. The results are output for the user. Any .txt |
+|              file with newline separated values can be used in place of the |
+|              current dictionary.                                            |
+|                                                                             |
 ******************************************************************************/
 #include <iostream>
 #include <fstream>
