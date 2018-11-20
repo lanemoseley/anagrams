@@ -3,11 +3,11 @@
 // functions for displaying the text box //////////////////////////////////////
 void printBottom ( int width )
 {
-    int i;
     unsigned char bl_corner = 200;
     unsigned char br_corner = 188;
     unsigned char flat = 205;
-    
+    int i;
+
     cout << bl_corner;
     
     for ( i = 0; i < width + 1; ++i )
@@ -23,8 +23,8 @@ void printBottom ( int width )
 void printData ( string &datastr, int pad, int width )
 {
     int count = 1;
-    int i;
     int j = 0;
+    int i;
     unsigned char vert = 186;
     
     while ( j < datastr.size() )
@@ -115,11 +115,11 @@ void printLine ( int width )
 
 void printTop ( int width )
 {
-    int i;
     unsigned char tl_corner = 201;
     unsigned char tr_corner = 187;
     unsigned char flat = 205;
-    
+    int i;
+
     cout << tl_corner;
     
     for ( i = 0; i < width + 1; ++i )
@@ -134,12 +134,12 @@ void printTop ( int width )
 
 void textBox ( string &label, vector<string> &data, int pad )
 {
-    string padding;
     string datastr;
+    string padding;
     int i, width;
     
     // forming data string
-    for ( int i = 0; i < data.size(); ++i )
+    for ( i = 0; i < data.size(); ++i )
     {
         if ( i == data.size() - 1 )
         {

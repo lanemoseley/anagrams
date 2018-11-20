@@ -30,14 +30,13 @@ template<class TY> bool openFile ( TY &stream, string fname );
 
 int main ( )
 {
-    string word = "";            // holds the word
-    vector<string> dct;          // stores the dictionary
     vector<string> anagrams;     // stores found anagrams
+    vector<string> dct;          // stores the dictionary
     vector<int> indexes;         // holds permuted indexes
+    string label = "";                
     vector<bool> used;           // tracks used indexes during permutation
-    int count = 1;               // counter for output formatting
-    string label;
-    
+    string word = "";
+
     cout << "Loading dictionary..." << endl;
     
     if ( !getDictionary ( dct ) )
@@ -79,9 +78,6 @@ int main ( )
             word.clear();
             
             cout << "\nEnter a lowercase word (or ctr-z to stop): ";
-            
-            // resetting counter
-            count = 1;
         }
     }
     
