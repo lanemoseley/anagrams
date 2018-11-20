@@ -17,6 +17,8 @@ using namespace std;
 
 
 // prototypes
+void clean ( vector<string> &v, string term );
+bool compare ( string left, string right );
 void findAnagram ( vector<string> &dct, vector<string> &anagrams,
                    vector<int> &index, vector<bool> &used,
                    string &str, int pos );
@@ -53,6 +55,7 @@ int main ( )
         
         // searching for anagrams
         findAnagram ( dct, anagrams, indexes, used, word, 0 );
+        clean ( anagrams, word );
         
         if ( anagrams.empty() )
         {
@@ -91,7 +94,42 @@ int main ( )
 
 
 
-// supporting functions
+// Supporting Functions ///////////////////////////////////////////////////////
+
+// sorts and eliminates duplicates in a string vector
+void clean ( vector<string> &v, string term )
+{
+    vector<string>::iterator curr, next;
+    bool stop = false;
+    
+    // sorting vector
+    sort ( v.begin(), v.end(), compare );
+    
+    // eliminating duplicates
+    while ( !stop && v.size() > 1 )
+    {
+        curr = v.begin();
+        next = curr + 1;
+        stop = true;
+        
+        if ( *curr == term || *curr == *next )
+        {
+            v.erase ( next );
+            stop = false;
+        }
+    }
+}
+
+
+
+// compares two values
+bool compare ( string left, string right )
+{
+    return left < right;
+}
+
+
+
 void findAnagram ( vector<string> &dct, vector<string> &anagrams,
                    vector<int> &index, vector<bool> &used,
                    string &str, int pos )
