@@ -119,6 +119,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="anagrams.cpp" />
+    <ClCompile Include="textBox.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="textBox.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

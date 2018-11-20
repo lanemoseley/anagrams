@@ -1,5 +1,5 @@
 /******************************************************************************
-| Lane Moseley - 11/20/18 - Anagram Finder                                    |
+| Lane Moseley - 11/20/18 - Anagram Solver                                    |
 |                                                                             |
 | Description: This program uses brute force permutation to find all anagrams |
 |              of a given word. The results are output for the user. Any .txt |
@@ -12,6 +12,8 @@
 #include <string>
 #include <vector>
 #include <algorithm>
+
+#include "textBox.h"
 
 using namespace std;
 
@@ -34,7 +36,7 @@ int main ( )
     vector<int> indexes;         // holds permuted indexes
     vector<bool> used;           // tracks used indexes during permutation
     int count = 1;               // counter for output formatting
-    
+    string label;
     
     cout << "Loading dictionary..." << endl;
     
@@ -45,7 +47,7 @@ int main ( )
     
     cout << "Dictionary loaded." << endl << endl;
     
-    cout << "Enter a word (or ctr-z to stop): ";
+    cout << "Enter a lowercase word (or ctr-z to stop): ";
     
     while ( getline ( cin, word ) )
     {
@@ -60,20 +62,15 @@ int main ( )
         if ( anagrams.empty() )
         {
             // no results found
-            cout << "\nNo anagrams found for \"" << word << "\"\n" << endl;
-            cout << "Enter a word (or ctr-z to stop): ";
+            cout << "No anagrams found for \"" << word << "\"\n" << endl;
+            cout << "Enter a lowercase word (or ctr-z to stop): ";
         }
         
         else
         {
             // outputting results
-            cout << "\nAnagrams for \"" << word << "\": " << endl;
-            
-            for ( auto x : anagrams )
-            {
-                cout << x << ( count % 5 == 0 ? "\n" : "\t" );
-                ++count;
-            }
+            label = "Anagrams for \"" + word + "\": ";
+            textBox ( label, anagrams, 6 );
             
             // resetting vectors
             anagrams.clear();
@@ -81,9 +78,8 @@ int main ( )
             used.clear();
             word.clear();
             
-            cout << ( ( ( count - 1 ) % 5 == 0 ) ? "\n" : "\n\n" )
-                 << "Enter a word (or ctr-z to stop): ";
-                 
+            cout << "\nEnter a lowercase word (or ctr-z to stop): ";
+            
             // resetting counter
             count = 1;
         }
@@ -100,22 +96,33 @@ int main ( )
 void clean ( vector<string> &v, string term )
 {
     vector<string>::iterator curr, next;
-    bool stop = false;
+    
+    if ( v.empty() )
+    {
+        return;
+    }
     
     // sorting vector
     sort ( v.begin(), v.end(), compare );
     
     // eliminating duplicates
-    while ( !stop && v.size() > 1 )
+    curr = v.begin();
+    next = curr + 1;
+    
+    while ( v.size() > 1 &&  curr + 1 != v.end() )
     {
-        curr = v.begin();
-        next = curr + 1;
-        stop = true;
-        
         if ( *curr == term || *curr == *next )
         {
             v.erase ( next );
-            stop = false;
+            
+            curr = v.begin();
+            next = curr + 1;
+        }
+        
+        else
+        {
+            ++curr;
+            ++next;
         }
     }
 }
@@ -178,6 +185,7 @@ void findAnagram ( vector<string> &dct, vector<string> &anagrams,
 
 
 
+// loads and sorts .txt dictionary
 bool getDictionary ( vector<string> &dictionary )
 {
     ifstream din;
